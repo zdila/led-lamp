@@ -1,4 +1,6 @@
 #include <math.h>
+#define DEBUG 0
+#define TIMEOUT 30000 // comment out if PIR sensor has timer built in
 
 int led = 9;
 int lightSensor = 4;
@@ -7,22 +9,38 @@ int moveSensor = 3;
 short darkness = 0;
 unsigned long fadeInTime = 0L;
 unsigned long fadeOutTime = 0L;
+unsigned long lastMovementTime = 0L;
 
 void setup() {
   pinMode(led, OUTPUT);
   pinMode(moveSensor, INPUT);
   pinMode(lightSensor, INPUT);
 
-  // Serial.begin(9600);
+#if DEBUG
+  Serial.begin(9600);
+#endif
 }
 
 void loop() {
   unsigned long t = millis();
-  int moving = digitalRead(moveSensor);
 
-  // Serial.print(moving);
-  // Serial.print(" ");
-  // Serial.println(darkness);
+#ifdef TIMEOUT
+  int justMoving = digitalRead(moveSensor);
+
+  if (justMoving) {
+    lastMovementTime = t;
+  }
+
+  int moving = t - lastMovementTime < TIMEOUT;
+#else
+  int moving = digitalRead(moveSensor);
+#endif
+
+#if DEBUG
+  Serial.print(moving);
+  Serial.print(" ");
+  Serial.println(darkness);
+#endif
 
   if (moving && !fadeInTime && darkness) {
     fadeInTime = t;

@@ -13,7 +13,7 @@
 ## Components
 
 - Arduino Pro Mini 3.3V Atmega328
-- HC-SR501 Infrared PIR Motion Sensor
+- HC-SR501 (has adjustable timer) or Keyestudio ks0052 (has no long timer) Infrared PIR Motion Sensor
 - Photoresistor Light Detection Sensor Module (http://www.ebay.com/itm/1PCS-Photoresistor-Sensor-Module-Light-Detection-Light-for-Arduino/221891172110)
 - USB battery charger with output and protection (http://www.ebay.com/itm/5V-Mini-USB-Li-ion-18650-Lithium-3-7V-Battery-Charging-Charger-Module-Protection-/112448290719)
 - resistors 10M and 10R
